@@ -1,0 +1,38 @@
+body {
+    background-color: #dbdbdb;
+    color: #000000;
+}
+
+label {
+    color: #000000;
+}
+
+.title {
+    background-color: #003f00;
+    color: #ffffff;
+    padding: 30px;
+}
+
+h5 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+div {
+    font-size: 15px;
+}
+
+p {
+    text-align: center;
+    font-size: 18px;
+}
+
+.btn{
+    background-color: #08b408;
+    color: #ffffff;
+}
+
+a {
+    color: #08b408;
+}

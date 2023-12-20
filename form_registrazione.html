@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Signup</title>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Form per la registrazione-->
+        <h1 class="title">Registrazione Utente!</h1> 
+
+        <form action="registrazione.php" method="post" id="registrazione">
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cognome">Cognome</label>
+                <input type="text" class="form-control" id="cognome" name="cognome" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>        
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="conferma_password">Ripeti password</label required>
+                <input type="password" class="form-control" id="conferma_password" name="conferma_password">
+            </div>
+
+            <div class="form-group">
+                <!-- Selezione ruolo --> 
+                <label>Tipologia utente</label><br>
+                <select class="form-select" id="ruolo" name="ruolo">
+                    <option value="vuoto"> </option>
+                    <option value="Lettore">Lettore </option>
+                    <option value="Giornalista">Giornalista </option>
+                </select>
+            </div> 
+
+            <!-- Nuovi campi che si aprono dopo la selezione del ruolo-->
+            <div class="form-group" id="campi">
+                <div id="categorie" class="form-check" style="display: none;">      
+                    <label>Categorie preferite</label><br>
+                    <input type="checkbox" class="form-check-input" id="cronaca" name="categorie[]" value="cronaca">
+                    <label class="form-check-label" for="cronaca">Cronaca</label><br>
+                    <input type="checkbox" class="form-check-input" id="economia" name="categorie[]" value="economia">
+                    <label class="form-check-label" for="economia">Economia</label><br>
+                    <input type="checkbox" class="form-check-input" id="politica" name="categorie[]" value="politica">
+                    <label class="form-check-label" for="politica">Politica</label><br>
+                    <input type="checkbox" class="form-check-input" id="sport" name="categorie[]" value="sport">
+                    <label class="form-check-label" for="sport">Sport</label><br>
+                    <input type="checkbox" class="form-check-input" id="motori" name="categorie[]" value="motori">
+                    <label class="form-check-label" for="motori">Motori</label><br>
+                    <input type="checkbox" class="form-check-input" id="moda" name="categorie[]" value="moda">
+                    <label class="form-check-label" for="moda">Moda</label><br>
+                    <input type="checkbox" class="form-check-input" id="salute" name="categorie[]" value="salute">
+                    <label class="form-check-label" for="salute">Salute</label><br>
+                </div> 
+
+                <div class="form-group" id="testata_giornalistica" style="display: none;">
+                    <label for="testata_giornalistica_input">Testata giornalistica:</label><br>
+                    <input type="text" id="testata_giornalistica_input" name="testata_giornalistica">
+                </div>
+            </div>    
+
+            <!-- script js che apre un nuovo label quando viene selezionato un ruolo -->
+            <script>
+                const selectOptions = document.getElementById('ruolo');
+                const categorie = document.getElementById('categorie');
+                const testataGiornalistica = document.getElementById('testata_giornalistica');
+
+                selectOptions.addEventListener('change', function() {
+                    if (selectOptions.value === 'Lettore') {
+                        categorie.style.display = 'block';
+                        testataGiornalistica.style.display = 'none';
+                    } else if (selectOptions.value === 'Giornalista') {
+                        categorie.style.display = 'none';
+                        testataGiornalistica.style.display = 'block';
+                    }
+                });
+            </script>
+
+            <br>
+            <button type="submit" class="btn">Registrati</button>
+
+            <div> 
+                <p>Sei già registrato? <a href="login.php"> Clicca qui.</a></p>
+            </div>   
+        </form>
+    </div>
+</body>
+</html>

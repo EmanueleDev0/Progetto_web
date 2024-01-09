@@ -40,7 +40,7 @@ if (isset($_SESSION["user_id"])) {
     <header>
         <div class="nav container">
             <a class="logo">Info<span>blog</span></a>
-            <a href="form_modifica_preferenze.php?id=<?= $id_lettore ?>" class="login">Modifica account</a>
+            <a href="form_modifica_account.php?id=<?= $id_lettore ?>" class="login">Modifica account</a>
             <a href="logout.php" class="login">Logout</a>
         </div>
     </header>

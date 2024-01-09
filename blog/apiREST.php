@@ -26,11 +26,17 @@ function handlePostRequestArticolo($table, $set, $pdo) {
     $sql = "INSERT INTO `$table` ($columns_string) VALUES ($values_string)";
     
     try {
-        $statement = $pdo->query($sql);
-        echo "INSERT OK";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $lastInsertId = $pdo->lastInsertId();
+        $response = array('status' => 'success', 'message' => 'INSERT OK', 'inserted_id' => $lastInsertId);
+        header('Content-Type: application/json');
+        echo json_encode($response);
     } catch (PDOException $e) {
         http_response_code(404);
-        die($e->getMessage());
+        $response = array('status' => 'error', 'message' => $e->getMessage());
+        header('Content-Type: application/json');
+        echo json_encode($response);
     }
 }
 
@@ -41,10 +47,14 @@ function handlePutRequestTitolo($table, $campo, $key, $pdo) {
         $stmt->bindParam(':campo', $campo, PDO::PARAM_STR);
         $stmt->bindParam(':id', $key, PDO::PARAM_INT);
         $stmt->execute();
-        echo "PUT OK";
+        $response = array('status' => 'success', 'message' => 'PUT OK');
+        header('Content-Type: application/json');
+        echo json_encode($response);
     } catch (PDOException $e) {
         http_response_code(404);
-        die($e->getMessage());
+        $response = array('status' => 'error', 'message' => $e->getMessage());
+        header('Content-Type: application/json');
+        echo json_encode($response);
     }
 }
 
@@ -55,10 +65,14 @@ function handlePutRequestCorpo($table, $campo, $key, $pdo) {
         $stmt->bindParam(':campo', $campo, PDO::PARAM_STR);
         $stmt->bindParam(':id', $key, PDO::PARAM_INT);
         $stmt->execute();
-        echo "PUT OK";
+        $response = array('status' => 'success', 'message' => 'PUT OK');
+        header('Content-Type: application/json');
+        echo json_encode($response);
     } catch (PDOException $e) {
         http_response_code(404);
-        die($e->getMessage());
+        $response = array('status' => 'error', 'message' => $e->getMessage());
+        header('Content-Type: application/json');
+        echo json_encode($response);
     }
 }
 
@@ -69,10 +83,14 @@ function handlePutRequestImmagine($table, $campo, $key, $pdo) {
         $stmt->bindParam(':campo', $campo, PDO::PARAM_STR);
         $stmt->bindParam(':id', $key, PDO::PARAM_INT);
         $stmt->execute();
-        echo "PUT OK";
+        $response = array('status' => 'success', 'message' => 'PUT OK');
+        header('Content-Type: application/json');
+        echo json_encode($response);
     } catch (PDOException $e) {
         http_response_code(404);
-        die($e->getMessage());
+        $response = array('status' => 'error', 'message' => $e->getMessage());
+        header('Content-Type: application/json');
+        echo json_encode($response);
     }
 }
 
@@ -83,10 +101,14 @@ function handlePutRequestCategoria($table, $campo, $key, $pdo) {
         $stmt->bindParam(':campo', $campo, PDO::PARAM_STR);
         $stmt->bindParam(':id', $key, PDO::PARAM_INT);
         $stmt->execute();
-        echo "PUT OK";
+        $response = array('status' => 'success', 'message' => 'PUT OK');
+        header('Content-Type: application/json');
+        echo json_encode($response);
     } catch (PDOException $e) {
         http_response_code(404);
-        die($e->getMessage());
+        $response = array('status' => 'error', 'message' => $e->getMessage());
+        header('Content-Type: application/json');
+        echo json_encode($response);
     }
 }
 
@@ -94,10 +116,14 @@ function handleDeleteRequest($table, $key, $pdo) {
     $sql = "DELETE FROM `$table` WHERE id = " . $pdo->quote($key);
     try {
         $statement = $pdo->query($sql);
-        echo "DELETE OK";
+        $response = array('status' => 'success', 'message' => 'DELETE OK');
+        header('Content-Type: application/json');
+        echo json_encode($response);
     } catch (PDOException $e) {
         http_response_code(404);
-        die($e->getMessage());
+        $response = array('status' => 'error', 'message' => $e->getMessage());
+        header('Content-Type: application/json');
+        echo json_encode($response);
     }
 }
 
@@ -124,8 +150,5 @@ if (isset($input)) {
         $set .= ($values[$i] === null ? 'NULL' : $values[$i]);
     }
 }
-
-// Chiudi la connessione PDO
-$pdo = null;
 
 ?>

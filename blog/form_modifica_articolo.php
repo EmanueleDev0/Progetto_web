@@ -57,7 +57,7 @@ if (isset($_GET['id'])) {
 
     <!-- Sezione modifica articolo -->
     <section class='post-header-modifica'>
-        <form action="modifica_articolo.php" method="post" id="modifica">
+    <form action="modifica_articolo.php" method="post" id="modifica">
             <div class='header-content post-container'>
 
                 <!-- Campo per il titolo dell'articolo -->
@@ -101,10 +101,11 @@ if (isset($_GET['id'])) {
         
         <!-- Campo nascosto per passare l'ID dell'articolo -->
         <input type="hidden" name="id_articolo" value="<?= htmlspecialchars($id_articolo) ?>">
+        <input type="hidden" name="_method" value="PUT"> 
 
         <!-- Pulsante di modifica -->
         <div class="accentra-scelte-categorie">
-            <button type="submit" class="btn">Modifica</button>
+            <button type="button" id="put" class="btn">Modifica</button>
         </div>
 
     </section>
@@ -121,6 +122,13 @@ if (isset($_GET['id'])) {
     <!-- Script jQuery e personalizzato -->
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
+    <script>
+        // Aggiungi un listener per gestire la richiesta DELETE quando l'utente clicca su "Si"
+        document.getElementById('put').addEventListener('click', function () {
+            var form = document.getElementById('modifica');
+            form.submit();
+        });
+    </script>
 
 </body>
 

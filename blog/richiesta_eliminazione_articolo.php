@@ -24,6 +24,7 @@ if (isset($_GET['id'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,11 +37,11 @@ if (isset($_GET['id'])) {
 
     <header>
 
-    <div class="nav container">
+        <div class="nav container">
 
-        <a href="javascript:history.back()" class="logo">Info<span>blog</span></a>
+            <a href="javascript:history.back()" class="logo">Info<span>blog</span></a>
 
-    </div>
+        </div>
 
     </header>
 
@@ -56,10 +57,20 @@ if (isset($_GET['id'])) {
         <form action="eliminazione_articolo.php" method="post" id="eliminazione">
             <h3>Sei sicuro di voler eliminare l'articolo?</h3>
             <input type="hidden" name="id_articolo" value="<?= $articolo['id'] ?>">
-            <button type="submit" name="conferma" value="si" class="scelta">Si</button>
+            <input type="hidden" name="_method" value="DELETE"> <!-- Aggiunto campo nascosto per il metodo DELETE -->
+            <button type="button" id="delete" class="scelta">Si</button>
             <button type="button" onclick="javascript:history.back()" class="scelta">No</button>
         </form>
     </div>
 
+    <script>
+        // Aggiungi un listener per gestire la richiesta DELETE quando l'utente clicca su "Si"
+        document.getElementById('delete').addEventListener('click', function () {
+            var form = document.getElementById('eliminazione');
+            form.submit();
+        });
+    </script>
+
 </body>
+
 </html>

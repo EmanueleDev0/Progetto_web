@@ -1,38 +1,47 @@
 <?php
-// Verifica se è presente un parametro 'id' nell'URL
-if (isset($_GET['id'])) {
-    // Recupera l'id dall'URL
-    $id_articolo = $_GET['id'];
+include 'apiREST.php';  // Includi il file api.php
 
-    // Include il file di connessione al database
-    $connessione = require __DIR__ . "/connessione_db.php";
+if ($_SERVER["REQUEST_METHOD"] === 'GET'){
+    // Verifica se è presente un parametro 'id' nell'URL
+    if (isset($_GET['id'])) {
+        // Recupera l'id dall'URL
+        $id_articolo = $_GET['id'];
 
-    // Prepara e esegui una query per recuperare l'articolo con l'id specificato
-    $sql_articolo = "SELECT * FROM articoli WHERE ID = :id_articolo";
-    $stmt_articolo = $connessione->prepare($sql_articolo);
-    $stmt_articolo->bindParam(':id_articolo', $id_articolo, PDO::PARAM_INT);
-    $stmt_articolo->execute();
+        // Include il file di connessione al database
+        $connessione = require __DIR__ . "/connessione_db.php";
 
-    // Estrai i dati dell'articolo dalla query
-    $articolo = $stmt_articolo->fetch(PDO::FETCH_ASSOC);
+        // Chiamata alla funzione handleGetRequest
+        $result = handleGetRequestID('articoli', $id_articolo, $connessione);
 
-    // Assegna i valori estratti alle variabili
-    $titolo_articolo = $articolo['titolo'];
-    $corpo_articolo = $articolo['contenuto'];
-    // Ottenere il primo carattere del corpo dell'articolo
-    $prima_lettera = mb_substr($corpo_articolo, 0, 1);
-    // Ottenere il resto del corpo dell'articolo
-    $resto_testo = mb_substr($corpo_articolo, 1);
-    $autore_articolo = $articolo['autore'];
-    $nome_giornale = $articolo['nome_giornale'];
-    $immagine = $articolo['immagine'];
-    $data_pubblicazione = $articolo['data_pubblicazione'];
+        // Se la funzione handleGetRequest ha restituito risultati
+        if ($result) {
+            // Estrai i dati dell'articolo dalla risposta
+            $articolo = $result[0];
 
-} else {
-    // Se l'id non è presente nell'URL, mostra un messaggio di errore
-    echo "Impossibile aprire l'articolo";
+            // Assegna i valori estratti alle variabili
+            $titolo_articolo = $articolo['titolo'];
+            $corpo_articolo = $articolo['contenuto'];
+            // Ottenere il primo carattere del corpo dell'articolo
+            $prima_lettera = mb_substr($corpo_articolo, 0, 1);
+            // Ottenere il resto del corpo dell'articolo
+            $resto_testo = mb_substr($corpo_articolo, 1);
+            $autore_articolo = $articolo['autore'];
+            $nome_giornale = $articolo['nome_giornale'];
+            $immagine = $articolo['immagine'];
+            $data_pubblicazione = $articolo['data_pubblicazione'];
+
+        } else {
+            // Se la funzione handleGetRequest non ha restituito risultati, mostra un messaggio di errore
+            echo "Impossibile trovare l'articolo con l'ID specificato";
+        }
+
+    } else {
+        // Se l'id non è presente nell'URL, mostra un messaggio di errore
+        echo "Impossibile aprire l'articolo";
+    }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

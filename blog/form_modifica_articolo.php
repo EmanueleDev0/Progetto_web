@@ -20,7 +20,7 @@ if (isset($_GET['id'])) {
 
     // Assegna i dati alle variabili per utilizzarli nella pagina HTML
     $titolo_articolo = $articolo['titolo'];
-    $corpo_articolo = $articolo['contenuto'];
+    $contenuto_articolo = $articolo['contenuto'];
     $autore_articolo = $articolo['autore'];
     $immagine = $articolo['immagine'];
     $categoria = $articolo['categoria'];
@@ -39,6 +39,45 @@ if (isset($_GET['id'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <script>
+
+        window.onload = bindEvents;
+
+        function bindEvents(){
+            document.getElementById("put").addEventListener("click", updateArticle);
+        }
+
+        function updateArticle() { 
+            var data = {};
+            data.titolo = document.getElementById("titolo").value;
+            data.contenuto = document.getElementById("contenuto").value;
+            data.immagine = document.getElementById("immagine").value;
+            data.categoria = document.getElementById("categoria").value;
+
+            var jsondata = JSON.stringify(data);
+
+            var oReq = new XMLHttpRequest();
+            oReq.onload = function () {
+                // Verifica se la richiesta è andata a buon fine
+                if (oReq.status === 200 && oReq.readyState === 4) {
+                    // Mostra il messaggio di successo
+                    document.getElementById("ajaxres").innerHTML = oReq.responseText;
+
+                    // Reindirizza l'utente alla pagina di completamento
+                    window.location.href = "modifica_articolo_completata.html";
+                } else {
+                    // Se la richiesta non è andata a buon fine, mostra un messaggio di errore
+                    document.getElementById("ajaxres").innerHTML = "Errore durante la modifica dell'articolo.";
+                }
+            };
+
+            oReq.open("PUT", "api.php/articoli/" + document.getElementById("id_articolo").value, true);
+            oReq.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+            // Aggiunta del parametro pdo
+            oReq.send(jsondata, <?php echo json_encode($connessione); ?>);
+        }
+    </script>
     <title>Modifica articolo</title>
 </head>
 
@@ -57,7 +96,7 @@ if (isset($_GET['id'])) {
 
     <!-- Sezione modifica articolo -->
     <section class='post-header-modifica'>
-    <form action="modifica_articolo.php" method="post" id="modifica">
+    <form id="modifica">
             <div class='header-content post-container'>
 
                 <!-- Campo per il titolo dell'articolo -->
@@ -66,7 +105,7 @@ if (isset($_GET['id'])) {
                 </h1>
 
                 <!-- Campo per il link dell'immagine -->
-                <input class="campo-trasparente header-title-trasparente" type="text" id="link_immagine" name="link_immagine" value="<?= htmlspecialchars($immagine) ?>" placeholder="Inserisci il link dell'immagine" required oninput="updateImagePreview(this.value)">
+                <input class="campo-trasparente header-title-trasparente" type="text" id="immagine" name="immagine" value="<?= htmlspecialchars($immagine) ?>" placeholder="Inserisci il link dell'immagine" required oninput="updateImagePreview(this.value)">
                 <img style="display: none;" src="" alt='' class='image-preview header-img-modifica' id="imagePreview">
             
             </div>
@@ -78,8 +117,8 @@ if (isset($_GET['id'])) {
         <!-- Anteprima del titolo -->
         <h2 class='sub-heading-articolo' id="previewTitle"></h2>
 
-        <!-- Campo per il corpo dell'articolo -->
-        <p class='post-text'><textarea class="campo-trasparente-corpo accentra" type="text" id="corpo" name="corpo" placeholder="INSERISCI IL CORPO DELL'ARTICOLO" required><?= htmlspecialchars($corpo_articolo) ?></textarea></p>
+        <!-- Campo per il contenuto dell'articolo -->
+        <p class='post-text'><textarea class="campo-trasparente-contenuto accentra" type="text" id="contenuto" name="contenuto" placeholder="INSERISCI IL contenuto DELL'ARTICOLO" required><?= htmlspecialchars($contenuto_articolo) ?></textarea></p>
 
         <!-- Sezione selezione categoria -->
         <div id="campi" class="accentra-scelte-categorie">
@@ -100,14 +139,14 @@ if (isset($_GET['id'])) {
         </div>
         
         <!-- Campo nascosto per passare l'ID dell'articolo -->
-        <input type="hidden" name="id_articolo" value="<?= htmlspecialchars($id_articolo) ?>">
-        <input type="hidden" name="_method" value="PUT"> 
+        <input type="hidden" name="id_articolo" id="id_articolo" value="<?= htmlspecialchars($id_articolo) ?>">
 
         <!-- Pulsante di modifica -->
         <div class="accentra-scelte-categorie">
             <button type="button" id="put" class="btn">Modifica</button>
         </div>
 
+        <p id="ajaxres"></p>
     </section>
     </form>
 
@@ -122,13 +161,6 @@ if (isset($_GET['id'])) {
     <!-- Script jQuery e personalizzato -->
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
-    <script>
-        // Aggiungi un listener per gestire la richiesta DELETE quando l'utente clicca su "Si"
-        document.getElementById('put').addEventListener('click', function () {
-            var form = document.getElementById('modifica');
-            form.submit();
-        });
-    </script>
 
 </body>
 

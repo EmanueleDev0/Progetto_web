@@ -57,7 +57,7 @@ if (isset($_GET['id'])) {
             <!-- Sezione selezione categorie preferite -->
             <div id="logo_giornale">
                 <label for="link_immagine">Link logo del giornale</label>
-                <input type="text" id="link_immagine" name="link_immagine" value="<?= htmlspecialchars($logo_giornale) ?>" placeholder="Inserisci il link del logo" required oninput="updateImagePreview(this.value)">
+                <input type="text" id="immagine" name="immagine" value="<?= htmlspecialchars($logo_giornale) ?>" placeholder="Inserisci il link del logo" required oninput="updateImagePreview(this.value)">
                 <img style="display: none;" src="" alt='' class='image-preview logo-img-modifica' id="imagePreview">
             </div>
 

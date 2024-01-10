@@ -483,6 +483,7 @@ header.shadow{
     -webkit-line-clamp: 2; /* titolo su due righe*/
     -webkit-box-orient: vertical;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .post-date{

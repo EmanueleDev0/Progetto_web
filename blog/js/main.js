@@ -50,7 +50,7 @@ window.addEventListener("scroll", () => {
 // Funzione per vedere in anteprima l'immagine
 function updateImagePreview(url) {
     var imagePreview = document.getElementById('imagePreview');
-    var linkImmagine = document.getElementById('link_immagine');
+    var linkImmagine = document.getElementById('immagine');
 
     if (url.trim() !== '') {
         imagePreview.src = url;
@@ -70,7 +70,7 @@ function updateTitlePreview(value) {
 document.addEventListener("DOMContentLoaded", function () {
     // Recupera i valori iniziali
     var titoloInput = document.getElementById('titolo');
-    var immagineInput = document.getElementById('link_immagine');
+    var immagineInput = document.getElementById('immagine');
 
     // Chiama le funzioni di anteprima con i valori iniziali
     updateImagePreview(immagineInput.value);

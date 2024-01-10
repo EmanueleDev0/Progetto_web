@@ -1,45 +1,15 @@
 <?php
-include 'apiREST.php';  // Includi il file api.php
 
-if ($_SERVER["REQUEST_METHOD"] === 'GET'){
-    // Verifica se è presente un parametro 'id' nell'URL
-    if (isset($_GET['id'])) {
-        // Recupera l'id dall'URL
-        $id_articolo = $_GET['id'];
+$titolo_articolo = $_GET['titolo_articolo'];
+$immagine = $_GET['immagine'];
+$autore_articolo = $_GET['autore_articolo'];
+$data_pubblicazione = $_GET['data_pubblicazione'];
+$contenuto = $_GET['contenuto'];
+// Ottenere il primo carattere del corpo dell'articolo
+$prima_lettera = mb_substr($contenuto, 0, 1);
+// Ottenere il resto del corpo dell'articolo
+$resto_testo = mb_substr($contenuto, 1);
 
-        // Include il file di connessione al database
-        $connessione = require __DIR__ . "/connessione_db.php";
-
-        // Chiamata alla funzione handleGetRequest
-        $result = handleGetRequestID('articoli', $id_articolo, $connessione);
-
-        // Se la funzione handleGetRequest ha restituito risultati
-        if ($result) {
-            // Estrai i dati dell'articolo dalla risposta
-            $articolo = $result[0];
-
-            // Assegna i valori estratti alle variabili
-            $titolo_articolo = $articolo['titolo'];
-            $corpo_articolo = $articolo['contenuto'];
-            // Ottenere il primo carattere del corpo dell'articolo
-            $prima_lettera = mb_substr($corpo_articolo, 0, 1);
-            // Ottenere il resto del corpo dell'articolo
-            $resto_testo = mb_substr($corpo_articolo, 1);
-            $autore_articolo = $articolo['autore'];
-            $nome_giornale = $articolo['nome_giornale'];
-            $immagine = $articolo['immagine'];
-            $data_pubblicazione = $articolo['data_pubblicazione'];
-
-        } else {
-            // Se la funzione handleGetRequest non ha restituito risultati, mostra un messaggio di errore
-            echo "Impossibile trovare l'articolo con l'ID specificato";
-        }
-
-    } else {
-        // Se l'id non è presente nell'URL, mostra un messaggio di errore
-        echo "Impossibile aprire l'articolo";
-    }
-}
 ?>
 
 

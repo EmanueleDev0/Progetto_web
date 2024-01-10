@@ -49,6 +49,37 @@ if (isset($_SESSION["user_id"])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <script>
+
+    window.onload = bindEvents;
+
+    function bindEvents() {
+        var postTitles = document.getElementsByClassName("post-title");
+        for (var i = 0; i < postTitles.length; i++) {
+            postTitles[i].addEventListener("click", function () {
+                var articleData = JSON.parse(this.getAttribute("data-article"));
+                readArticle(articleData);
+            });
+        }
+    }
+
+    function readArticle(articolo) {
+        var idArticolo = articolo.id; // Assumi che ci sia un campo 'id' nell'oggetto articolo
+
+        var oReq = new XMLHttpRequest();
+        oReq.onload = function () {
+            // Redirect alla pagina articolo.php con i dati dell'articolo come parametri GET
+            window.location.href = 'articolo.php' +
+                '?titolo_articolo=' + encodeURIComponent(articolo.titolo) +
+                '&immagine=' + encodeURIComponent(articolo.immagine) +
+                '&autore_articolo=' + encodeURIComponent(articolo.autore) +
+                '&data_pubblicazione=' + encodeURIComponent(articolo.data_pubblicazione) +
+                '&contenuto=' + encodeURIComponent(articolo.contenuto);
+        };
+        oReq.open("GET", "api.php/articoli/" + idArticolo, true);
+        oReq.send();
+    }
+    </script>
     <title>Dashboard Giornalista</title>
 </head>
 
@@ -57,7 +88,7 @@ if (isset($_SESSION["user_id"])) {
 
     <div class="nav container">
 
-        <a href="#" class="logo">Info<span>blog</span></a>
+        <a class="logo">Info<span>blog</span></a>
         <a href="form_modifica_account_giornalista.php?id=<?= $id_giornalista ?>" class="login">Modifica account</a>
         <a href="logout.php" class="login">Logout</a>
 
@@ -79,11 +110,11 @@ if (isset($_SESSION["user_id"])) {
     <!-- Sezione per scrivere un nuovo articolo o navigare nel blog -->
     <section class="post container">
 
-        <div class="dashboard-box">
-            <div class="post-title">
-                Se desideri scrivere un nuovo articolo <a href="form_creazione_articolo.html">clicca qui</a>.
-            </div>
+    <div class="dashboard-box">
+        <div class="post-title">
+            Se desideri scrivere un nuovo articolo <a href="form_creazione_articolo.php?id=<?= $id_giornalista ?>">clicca qui</a>.
         </div>
+    </div>
 
         <div class="dashboard-box">
             <div class="post-title">
@@ -132,7 +163,7 @@ if (isset($_SESSION["user_id"])) {
                 <div class="post-box-lettore '.$articoli['categoria'].'">
                     <img src="'.$articoli['immagine'].'" alt="" class="post-img">
                     <h2 class="categoria">'.$articoli['categoria'].'</h2>
-                    <a href="articolo.php?id='.$articoli['id'].'" class="post-title">
+                    <a class="post-title" data-article="'.htmlspecialchars(json_encode($articoli)).'">
                         '.$articoli['titolo'].'
                     </a>
                     <span class="post-date">'.$articoli['data_pubblicazione'].'</span>
@@ -146,7 +177,7 @@ if (isset($_SESSION["user_id"])) {
                         </div>
                     </div>                    
                 </div>';
-        }
+        }        
         
         echo '</section>';
 
@@ -165,6 +196,8 @@ if (isset($_SESSION["user_id"])) {
             <a class="social-img" href="https://www.unime.it/"><img src="img/logo_unime.png"></a>
         </div>
     </div>
+
+    <p id="ajaxres"></p>
     
     <!-- Script JavaScript (jQuery) -->
     <script

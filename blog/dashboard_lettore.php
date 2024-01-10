@@ -33,6 +33,37 @@ if (isset($_SESSION["user_id"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard lettore</title>
     <link rel="stylesheet" href="css/style.css">
+    <script>
+
+    window.onload = bindEvents;
+
+    function bindEvents() {
+        var postTitles = document.getElementsByClassName("post-title");
+        for (var i = 0; i < postTitles.length; i++) {
+            postTitles[i].addEventListener("click", function () {
+                var articleData = JSON.parse(this.getAttribute("data-article"));
+                readArticle(articleData);
+            });
+        }
+    }
+
+    function readArticle(articolo) {
+        var idArticolo = articolo.id;
+
+        var oReq = new XMLHttpRequest();
+        oReq.onload = function () {
+            // Redirect alla pagina articolo.php con i dati dell'articolo come parametri GET
+            window.location.href = 'articolo.php' +
+                '?titolo_articolo=' + encodeURIComponent(articolo.titolo) +
+                '&immagine=' + encodeURIComponent(articolo.immagine) +
+                '&autore_articolo=' + encodeURIComponent(articolo.autore) +
+                '&data_pubblicazione=' + encodeURIComponent(articolo.data_pubblicazione) +
+                '&contenuto=' + encodeURIComponent(articolo.contenuto);
+        };
+        oReq.open("GET", "api.php/articoli/" + idArticolo, true);
+        oReq.send();
+    }
+    </script>
 </head>
 
 <body>
@@ -113,8 +144,8 @@ if (isset($_SESSION["user_id"])) {
             <div class="post-box-lettore ' . $articoli['categoria'] . '">
                     <img src="' . $articoli['immagine'] . '" alt="" class="post-img">
                     <h2 class="categoria">' . $articoli['categoria'] . '</h2>
-                    <a href="articolo.php?id=' . $articoli['id'] . '" class="post-title">
-                        ' . $articoli['titolo'] . '
+                    <a class="post-title" data-article="'.htmlspecialchars(json_encode($articoli)).'">
+                        '.$articoli['titolo'].'
                     </a>
                     <span class="post-date">' . $articoli['data_pubblicazione'] . '</span>
                     <p class="post-description">' . $articoli['contenuto'] . '</p>
@@ -127,6 +158,8 @@ if (isset($_SESSION["user_id"])) {
         ?>
 
     </section>
+    
+    <p id="ajaxres"></p>
     
     <!-- Footer -->
     <div class="footer-lettore container">

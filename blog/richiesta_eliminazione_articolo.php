@@ -31,6 +31,39 @@ if (isset($_GET['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eliminazione articolo</title>
     <link rel="stylesheet" href="css/style.css">
+    <script>
+
+        window.onload = bindEvents;
+
+        function bindEvents(){
+            document.getElementById("delete").addEventListener("click", deleteArticle);
+        }
+
+        function deleteArticle() {
+            var id_articolo = document.getElementById("id_articolo").value;
+            
+            var oReq = new XMLHttpRequest();
+            oReq.onload = function () {
+                // Verifica se la richiesta è andata a buon fine
+                if (oReq.status === 200 && oReq.readyState === 4) {
+                    // Mostra il messaggio di successo
+                    document.getElementById("ajaxres").innerHTML = oReq.responseText;
+
+                    // Reindirizza l'utente alla pagina di completamento
+                    window.location.href = "eliminazione_completata.html";
+                } else {
+                    // Se la richiesta non è andata a buon fine, mostra un messaggio di errore
+                    document.getElementById("ajaxres").innerHTML = "Errore durante l'eliminazione dell'articolo.";
+                }
+            };
+
+            oReq.open("DELETE", "api.php/articoli/" + id_articolo, true);
+            oReq.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+            // Invia la richiesta senza dati nel corpo
+            oReq.send();
+        }
+    </script>
 </head>
 
 <body>
@@ -54,22 +87,14 @@ if (isset($_GET['id'])) {
 
     <!-- Form per la conferma di eliminazione dell'articolo -->
     <div class="container">
-        <form action="eliminazione_articolo.php" method="post" id="eliminazione">
+        <form id="eliminazione">
             <h3>Sei sicuro di voler eliminare l'articolo?</h3>
-            <input type="hidden" name="id_articolo" value="<?= $articolo['id'] ?>">
-            <input type="hidden" name="_method" value="DELETE"> <!-- Aggiunto campo nascosto per il metodo DELETE -->
+            <input type="hidden" name="id_articolo" id="id_articolo" value="<?= htmlspecialchars($id_articolo) ?>">
             <button type="button" id="delete" class="scelta">Si</button>
             <button type="button" onclick="javascript:history.back()" class="scelta">No</button>
         </form>
     </div>
-
-    <script>
-        // Aggiungi un listener per gestire la richiesta DELETE quando l'utente clicca su "Si"
-        document.getElementById('delete').addEventListener('click', function () {
-            var form = document.getElementById('eliminazione');
-            form.submit();
-        });
-    </script>
+    <p id="ajaxres"></p>
 
 </body>
 

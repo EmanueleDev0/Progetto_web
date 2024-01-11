@@ -1,0 +1,1215 @@
+/*Font*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    scroll-padding-top: 2rem;
+    box-sizing: border-box;
+}
+
+/* Colori predefiniti*/
+:root {
+    --container-color: #003f00;
+    --second-color: #333333;
+    --third-color: #08b408;
+    --bg-color: #dbdbdb;
+    --text-color: #000;
+}
+
+::selection {
+    color: var(--bg-color);
+    background: var(--second-color);
+}
+
+/* Css per i tag */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+label {
+    color: var(--text-color);
+}
+
+h3{
+    margin-top: 15px;
+    text-align: center;
+    font-size: 26px;
+}
+
+h4{
+    margin-top: 4px;
+    text-align: center;
+    font-size: 22px;
+}
+
+h5 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+div {
+    font-size: 15px;
+}
+
+p {
+    margin-top: 8px;
+    text-align: center;
+    font-size: 12px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--third-color);
+}
+
+li {
+    list-style: none;
+}
+
+img{
+    width: 100%;
+}
+
+section {
+    padding: 3rem 0 2rem;
+}
+
+/* Css per i form */
+form {
+    text-align: center;
+    padding: 50px;
+    width: 100%;
+}
+
+input {
+    display: block;
+    width: 30%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--container-color);
+    margin-bottom: 15px;
+    margin: 0 auto 15px;
+}
+
+input[type=checkbox] {
+    display: none;
+}
+
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0; /* Nessuno spazio tra le colonne */
+}
+
+input[type=checkbox] + label {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centra il testo */
+    cursor: pointer;
+    padding: 10px;
+    text-align: center;
+    width: 100%; /* Rendiamo le label larghe al 100% del container padre */
+    box-sizing: border-box;
+    margin-right: 10px; /* Aggiunto margine destro per separare i checkbox */
+}
+
+/* Stile per la spunta del checkbox */
+input[type=checkbox] + label:before {
+    content: "\2714";
+    border: 0.1em solid var(--text-color);
+    border-radius: 0.2em;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    padding-left: 0.2em;
+    padding-bottom: 0.3em;
+    margin-right: 0.2em;
+    vertical-align: bottom;
+    color: transparent;
+    transition: .2s;
+}
+
+input[type=checkbox] + label:active:before {
+    transform: scale(0);
+}
+
+input[type=checkbox]:checked + label:before {
+    background-color: var(--container-color);
+    border-color: var(--container-color);
+    color: var(--bg-color);
+}
+
+textarea{
+    display: block;
+    width: 70%;
+    padding: 50px;
+    border-radius: 5px;
+    border: 1px solid var(--container-color);
+    margin: 0 auto 15px;
+}
+
+legend {
+    padding: 10px;
+    background:  var(--container-color);
+    color: var(--bg-color);
+}
+
+fieldset {  
+    border: 1.6px solid var(--container-color);
+    width: 50%;
+    margin: 0 auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+select {
+    display: block;
+    width: 30%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--container-color);
+    margin-bottom: 15px;
+    margin: 0 auto 15px;
+}
+
+select option:checked {
+    background-color: var(--container-color);
+    color: var(--bg-color);
+}
+
+select option:active {
+    background-color: var(--container-color);
+    color: var(--bg-color); 
+}
+
+select option:hover {
+    background-color: var(--container-color); 
+    color: var(--bg-color);
+}
+
+/* Css per alcuni casi specifici */
+.title {
+    background-color: var(--container-color);
+    color: var(--bg-color);
+    padding: 30px;
+}
+
+.paragrafo{
+    margin-top: 8px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.accentra{
+    margin-top: 8px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.accentra-scelte-categorie{
+    margin-top: 8px;
+    text-align: center;
+    font-size: 15px;
+}
+.sinistra{
+    text-align: left;
+}
+
+.btn{
+    margin-top: 30px;
+    padding: 5px 10px;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-radius: 4px;
+    background: var(--container-color);
+    color: var(--bg-color);
+}
+
+.btn:hover{
+    background: hsl(135, 83%, 34%);
+    transition: 0.3s;
+}
+
+.btn-elimina{
+    margin-top: 30px;
+    padding: 5px 10px;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-radius: 4px;
+    background: rgb(163, 1, 1);
+    color: var(--bg-color);
+}
+
+.btn-elimina:hover{
+    background: rgb(255, 0, 0);
+    transition: 0.3s;
+}
+
+.scelta {
+    margin-top: 30px;
+    padding: 5px 10px;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-radius: 4px;
+    background: var(--container-color);
+    color: var(--bg-color);
+    height: 40px;
+    width: 100px;
+    display: inline-block;
+}
+
+.scelta:hover{
+    background: hsl(135, 83%, 34%);
+    transition: 0.3s;
+}
+
+.campo-trasparente{
+    background: transparent;
+    border: none;
+}
+
+.campo-trasparente-corpo{
+    background: transparent;
+    border: none;
+}
+
+.benvenuto{
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 100;
+}
+
+.sub-benvenuto{
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 30;
+}
+ 
+/* css per il pulsante login*/
+.login{
+    padding: 5px 10px;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-radius: 4px;
+    background: var(--second-color);
+    color: var(--bg-color);
+}
+
+.login:hover {
+    background: hsl(150, 92%, 25%);
+    transition: 0.3s;
+}
+
+/* Css per la disposizione della home */
+.container{
+    max-width: 1400px;
+    margin: auto;
+    width: 100%;
+}
+
+/*Header*/
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 200;
+}
+
+header.shadow{
+    background: var(--container-color);
+    box-shadow: 0 1px 4px hsl(150, 92%, 25%);
+    transition: 0.4s;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0px;
+}
+
+/* css per il logo del sito*/
+.logo{
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--third-color);
+}
+
+.logo span{
+    color: var(--text-color);
+}
+
+.verde{
+    color: rgb(0, 185, 0);
+}
+
+/* css per la home*/
+.home{
+    width: 100%;
+    min-height: 350px;
+    background: var(--container-color);
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-lettore{
+    width: 100%;
+    min-height: 350px;
+    background: var(--container-color);
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-text{
+    color: var(--bg-color);
+    text-align: center;
+}
+
+.home-title{
+    font-size: 3.2rem;
+}
+
+.login-section{
+    width: 100%;
+    min-height: 270px;
+    background: var(--container-color);
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-title{
+    font-size: 2.5rem;
+}
+
+.home-subtitle{
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+/* css per la barra delle categorie*/
+.post-filter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 1.5rem;
+    margin-top: 2rem !important;
+}
+
+.post-filter-lettore{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 1.5rem;
+    margin-top: 2rem !important;
+}
+
+.filter-item{
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.active-filter{
+    background: var(--container-color);
+    color: var(--bg-color);
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+/* css per i post*/
+.post {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px,auto));
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.post-box{
+    background: #acb4ad;
+    box-shadow: 0 4px 14px hsl(355deg 25% 15% / 10%);
+    padding: 15px;
+    border-radius: 0.5rem;
+    width: 305px;
+    position: relative;
+}
+
+.post-box-lettore{
+    background: #acb4ad;
+    box-shadow: 0 4px 14px hsl(355deg 25% 15% / 10%);
+    padding: 15px;
+    border-radius: 0.5rem;
+    width: 305px;
+    position: relative;
+}
+
+.dashboard-box{
+    background: #acb4ad;
+    box-shadow: 0 4px 14px hsl(355deg 25% 15% / 10%);
+    padding: 15px;
+    border-radius: 0.5rem;
+}
+
+.post-img{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 0.5rem;
+}
+
+.categoria{
+    font-size: 0.950rem;
+    font-weight: 100;
+    text-transform: uppercase;
+    color: rgb(24, 158, 24);
+}
+
+.post-title{
+    font-size: 1.250rem;
+    font-weight: 300;
+    color: var(--text-color);
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* titolo su due righe*/
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.post-date{
+    display: flex;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-top: 4px;
+    color: var(--container-color);
+}
+
+.post-description{
+    font-size: 0.9rem;
+    line-height: 1.5rem;
+    margin: 5px 0 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* descrizione su tre righe*/
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.profile {
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.profile-img{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    border: 2px solid var(--container-color);
+}
+
+.profile-name{
+    font-size: 0.82rem;
+    font-weight: 500;
+    margin-right: 3px;    
+}
+
+.profile-buttons{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-right: 12px;
+    margin-bottom: 10px;
+}
+
+.edit-button {
+    padding: 3px 1px;
+    background-color: var(--second-color); 
+    color: var(--bg-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.edit-button:hover {
+    background-color: var(--third-color);
+}
+
+.elimina-button {
+    padding: 3px 1px;
+    background-color: rgb(163, 1, 1); 
+    color: var(--bg-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.elimina-button:hover {
+    background-color: rgb(255, 0, 0);
+}
+
+/* Css per il footer delle pagine*/
+.footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0;
+}
+
+.footer-articolo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0;
+}
+
+.footer-articolo-modifica{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0;
+}
+
+.footer-lettore{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0;
+}
+
+.footer p{
+    font-size: 0.938rem;
+}
+
+.social{
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+}
+
+.social-img img {
+    width: 35px;
+    height: auto; 
+}
+
+/*Css per apertura articolo*/
+.post-header{
+    width: 100%;
+    height: 500px;
+    background: var(--container-color);
+}
+
+.post-header-modifica{
+    width: 100%;
+    height: 500px;
+    background: var(--container-color);
+}
+
+.post-container{
+    max-width: 800px;
+    margin: auto;
+    width: 100%;
+}
+
+.drop-cap {
+    font-size: 2em;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.header-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4rem !important;
+}
+
+.back-home{
+    color: var(--bg-color);
+    font-size: 0.9rem;
+}
+
+.corpo-trasparente::placeholder {
+    color: rgb(68, 68, 68);
+}
+
+.header-title {
+    width: 90%;
+    font-size: 2.6rem;
+    color:var(--bg-color);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.header-title-trasparente{
+    width: 100%;
+    font-size: 2.6rem;
+    color: var(--bg-color);
+    text-align: center;
+    background: transparent;
+    border: none;
+    font-size: inherit;
+    display: block;
+    margin-bottom: 20px;
+    margin-right: 50px;
+}
+
+.header-title-trasparente::placeholder {
+    color: #b4b4b4;
+}
+
+.header-img{
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.header-img-modifica{
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.logo-img-modifica {
+    width: 100px; /* Imposta la larghezza desiderata */
+    height: 100px; /* Imposta l'altezza desiderata */
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%; /* Rende l'immagine a forma di cerchio */
+    display: block; /* Assicura che il bordo del cerchio funzioni correttamente */
+    margin: 0 auto; /* Centra l'immagine */
+}
+
+
+.post-content{
+    margin-top: 10rem !important;
+}
+
+.sub-heading{
+    font-size: 1.2rem;
+}
+
+.sub-heading-articolo{
+    margin-top: 50px;
+    font-size: 1.2rem;
+}
+
+.sub-subtitle{
+    font-size: 0.8rem; 
+    font-weight: 100; 
+    opacity: 0.8; 
+}
+
+.post-text{
+    font-size: 1rem;
+    line-height: 1.5rem;
+    margin: 1rem 0;
+    text-align: justify;
+    font-weight: 100;
+}
+
+/*Css Responsivo*/
+@media (max-width: 1060px){
+    .container{
+        margin: 0 auto;
+        width: 95%;
+    }
+    .home-text{
+        width: 100%;
+    }
+}
+
+@media (max-width: 800px){
+    .nav {
+        padding: 14px 0px;
+    }
+    .post-container{
+        margin: 0 auto;
+        width: 95%;
+    }
+}
+
+@media (max-width: 768px){
+    .nav {
+        padding: 10px 0px;
+    }
+    section {
+        padding: 2rem 0;
+    }
+    .header-content{
+        margin-top: 3rem !important;
+    }
+    .home{
+        min-height: 380px;
+    }
+    .home-title{
+        font-size: 3rem;
+    }
+    .header-title {
+        font-size: 2rem;
+    }
+    .header-img{
+        height: 370px;
+    }
+    .post-header{
+        height: 435px;
+    }
+    .post-content{
+        margin-top: 9rem !important;
+    }
+    .post-filter{
+        column-gap: 0.6rem;
+    }
+    .post-filter-lettore{
+        column-gap: 0.6rem;
+    }
+    input {
+        width: 40%;
+    }
+    select{
+        width: 40%;
+    }
+}
+
+@media (max-width: 632px){
+    .post-filter{
+        column-gap: 0.6rem;
+        flex-wrap: wrap;
+    }
+    .post-filter-lettore{
+        column-gap: 0.6rem;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 570px){
+    .home {
+        width: 117%;
+    }
+    .post-header{
+        height: 390px;
+    }
+    .header-title {
+        width: 100%;
+    }
+    .header-img{
+        height: 340px;
+    }
+    .footer{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 30px 0;
+    }
+    .post-filter {
+        column-gap: 0.6rem;
+        margin-left: 62px;
+    }
+    .post-filter-lettore {
+        column-gap: 0.6rem;
+        margin-left: 11px;
+    }
+    .post-box {
+        margin-left: 80px;
+    }
+    .home-title{
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 426px){
+    .home{
+        width: 148%;
+        min-height: 320px;
+    }
+    .home-lettore {
+        width: 212%;
+    }
+    .post-header {
+        height: 390px;
+        width: 191%;
+    }
+    .post-header-modifica {
+        width: 200%;
+        height: 560px;
+    }
+    .post-box {
+        padding: 10px;
+        width: 110%;
+    }
+    .post-box-lettore {
+        padding: 10px;
+        width: 110%;
+        margin-left: 215px;
+    }
+    .post-filter {
+        column-gap: 0.6rem;
+        flex-wrap: wrap;
+        margin-left: 111px;
+    }
+    .post-filter-lettore{
+        column-gap: 0.6rem;
+        flex-wrap: wrap;
+        margin-left: 245px;
+    }
+    .filter-item {
+        margin: 0.021rem;
+        font-size: 1rem;
+    }
+    .footer {
+        width: 135%;
+        margin-left: 25px;
+    }
+    .footer-articolo{
+        width: 175%;
+        margin-left: 25px;
+    }
+    .footer-lettore {
+        width: 190%;
+        margin-left: 40px;
+    }
+    .footer-articolo-modifica {
+        width: 185%;
+        margin-left: 25px;
+    }
+    p{
+        font-size: 1.0rem;
+    }
+    .home-title{
+        font-size: 1.8rem;
+        margin-top: 60px;
+    }
+    .header-title {
+        width: 100%;
+    }
+    .header-img {
+        height: 378px;
+        width: 95%;
+    }
+    .header-img-modifica {
+        height: 410px; 
+        width: 100%;
+        margin-right: 50px;
+    }
+    .post-container{
+        width: 183%;
+    }
+    .post-text {
+        margin-left: 22px;
+        font-size: 1.3rem;
+        line-height: 1.7rem;
+    }
+    .back-home{
+        margin-right: 0px;
+        font-size: 1rem;
+    }
+    .sub-heading {
+        margin-left: 23px;
+        font-size: 1.5rem;
+    }
+    .sub-subtitle {
+        margin-left: 22px;
+        font-size: 1rem;
+    }
+    .sub-heading-articolo {
+        margin-top: 0px;
+        font-size: 1.4rem;
+        margin-left: 25px;
+    }
+    input {
+        width: 80%;
+    }
+    select{
+        width: 80%;
+    }
+    .benvenuto {
+        width: 190%;
+        margin-left: 60px;
+    }
+    .sub-benvenuto {
+        font-size: 1rem;
+        font-weight: 500;
+        width: 190%;
+        margin-left: 50px;
+    }
+    .dashboard-box {
+        width: 113%;
+        margin-left: 210px;
+    }
+    .profile-buttons {
+        flex-direction: row;
+        margin-bottom: 15px;
+    }
+    .edit-button {
+        margin-right: 5px;
+    }
+    .campo-trasparente {
+        margin-right: 40px;
+    }
+    .campo-trasparente-corpo {
+        margin-right: 95px;
+        margin-top: -10px;
+    }
+    .accentra-scelte-categorie {
+        margin-left: 50px;
+    }
+    .header-title-trasparente {
+        width: 95%;
+    }
+}
+
+@media (max-width: 396px){
+    .home-title{
+        font-size: 2rem;
+    }
+    .home-subtitle{
+        font-size: 0.9rem;
+    }
+    .home {
+        width: 193%;
+        min-height: 300px;
+    }
+    .post-box {
+        padding: 10px;
+        width: 130%;
+        margin-left: 120px;
+    }
+    .post-box-lettore {
+        padding: 10px;
+        width: 130%;
+        margin-left: 150px;
+    }
+    .header-title{
+        font-size: 2rem;
+    }
+    .header-img{
+        height: 367px;
+    }
+    .post-header{
+        height: 436px;
+        width: 214%;
+    }
+    .post-content{
+        margin-top: 5rem !important;
+    }
+    .post-text{
+        font-size: 1.3rem;
+        line-height: 1.5rem;
+        margin: 12px;
+        margin-left: 23px;
+        width: 109%;
+    }
+    .post-filter {
+        column-gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-left: 180px;
+    }
+    .post-filter-lettore {
+        column-gap: 0.6rem;
+        flex-wrap: wrap;
+        margin-left: 218px;
+    }
+    .filter-item{
+        margin: 0.2rem;
+        font-size: 1.1rem;
+    }
+    .footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 30px 0;
+        width: 180%;
+    }
+    .footer-articolo {
+        width: 197%;
+        margin-left: 25px;
+    }
+    .footer-articolo-modifica {
+        width: 213%;
+        margin-left: 25px;
+    }
+    p {
+        font-size: 1.2rem;
+    }
+    .back-home {
+        margin-right: 0px;
+        font-size: 1.2rem;
+    }
+    .sub-subtitle {
+        margin-left: 22px;
+        font-size: 1.1rem;
+    }
+    .post-title {
+        font-size: 1.5rem;
+    }
+    .post-description {
+        font-size: 1.083rem;
+    }
+    .profile-name {
+        font-size: 0.99rem;
+    }
+    .dashboard-box {
+        margin-left: 180px;
+    }
+    .post-header-modifica {
+        width: 227%;
+    }
+    .accentra-scelte-categorie {
+        margin-left: 150px;
+    }
+    .sub-heading-articolo {
+        margin-top: 10px;
+    } 
+}
+
+@media (max-width: 321px){
+    .logo {
+        font-size: 1.7rem;
+    }
+    .login {
+        padding: 10px 15px;
+        font-size: 1.2rem;
+    }
+    .home{
+        width: 258%;
+        min-height: 360px;
+    }
+    .home-title {
+        font-size: 2.3rem;
+    }
+    .home-subtitle {
+        font-size: 1.2rem;
+    }
+    .post-filter {
+        column-gap: 0.7rem;
+        flex-wrap: wrap;
+        margin-left: 170px;
+        width: 150%;
+    }
+    .post-filter-lettore {
+        column-gap: 0.6rem;
+        flex-wrap: wrap;
+        margin-left: 180px;
+    }
+    .filter-item {
+        margin: 0.1rem;
+        font-size: 1.3rem;
+    }
+    .post-box {
+        padding: 10px;
+        margin-left: 114px;
+        width: 190%;
+    }
+    .post-box-lettore {
+        padding: 10px;
+        width: 140%;
+        margin-left: 110px;
+    }
+    .footer {
+        margin-left: 35px;
+        width: 240%;
+    }
+    p{
+        font-size: 1.4rem;
+    }
+    .footer-articolo {
+        width: 235%;
+        margin-left: 25px;
+    }
+    .back-home {
+        margin-right: 0px;
+        font-size: 1.2rem;
+    }
+    .sub-subtitle {
+        margin-left: 22px;
+        font-size: 1.2rem;
+        display: block;
+    }
+    .post-title {
+        font-size: 1.7rem;
+    }
+    .post-description {
+        font-size: 1.3rem;
+    }
+    .post-date {
+        font-size: 1.2rem;
+    }
+    .profile-name {
+        font-size: 1.3rem;
+    }
+    .post-text{
+        font-size: 1.3rem;
+        line-height: 1.8rem;
+        margin: 12px;
+        margin-left: 23px;
+        width: 118%;
+    }
+    .post-header{
+        height: 436px;
+        width: 250%;
+    }
+    .post-header-modifica {
+        width: 266%;
+    }
+    .post-content{
+        width: 200%;
+    }
+    .dashboard-box {
+        width: 137%;
+        margin-left: 120px;
+    }
+    .benvenuto {
+        margin-left: 40px;
+    }
+    .accentra-scelte-categorie {
+        margin-left: 190px;
+    }
+    .sub-heading-articolo {
+        margin-top: 10px;
+    }
+    .campo-trasparente {
+        margin-right: 48px;
+    }
+    .campo-trasparente-corpo {
+        margin-right: 90px;
+        margin-top: -10px;
+    }
+    .footer-articolo-modifica {
+        width: 250%;
+    }
+    .sub-benvenuto {
+        margin-left: 45px;
+    }
+    .login-title {
+        font-size: 2.0rem;
+    }
+    .header-title-trasparente {
+        width: 94%;
+    } 
+}
